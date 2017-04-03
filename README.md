@@ -6,5 +6,5 @@ André Leão,
 Gabriel Inácio,
 Gabriel Luiz
 
-Relatório: https://docs.google.com/document/d/1ar6-_WCrLeCsOHKxWOaH4wbZxHwsRf-b2rjKorxYOAg/edit
+Relatório: https://drive.google.com/open?id=1ar6-_WCrLeCsOHKxWOaH4wbZxHwsRf-b2rjKorxYOAg
 
