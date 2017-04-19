@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'project_manager',
     'behave_django',
+    'gunicorn',
 ]
 
 MIDDLEWARE = [
@@ -77,23 +78,12 @@ WSGI_APPLICATION = 'les.wsgi.application'
 
 
 # Database
-# https://docs.djangoproject.com/en/1.10/ref/settings/#databases
+# https://docs.djangoproject.com/en/1.10/ref/settings/#database
 
-ON_HEROKU = True
-if ON_HEROKU: # production settings
-    DATABASES['default'] = dj_database_url.config()
+DATABASES = {
+    'default': dj_database_url.config(default='postgres://hqoyzyhmwrpjxn:e3ab50dba9202312578dbd377e079fc084ee886fa642b291db2906f79db9dce1@ec2-54-204-32-145.compute-1.amazonaws.com:5432/dbndohnifdsqje')
+}
 
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'gde',
-            'USER': 'postgres',
-            'PASSWORD': '123456',
-            'HOST': 'localhost',
-            'PORT': '5432',
-        }
-    }
 
 
 
@@ -132,6 +122,9 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
-
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
