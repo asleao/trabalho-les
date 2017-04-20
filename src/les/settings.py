@@ -79,11 +79,14 @@ WSGI_APPLICATION = 'les.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#database
-
 DATABASES = {
-    'default': dj_database_url.config(default='postgres://papumbjqtfglvt:7de0dc1c9c03028a99e7b594102ae43b88ebf50b393aa7ec95f6d2e87ff000b7@ec2-54-235-72-121.compute-1.amazonaws.com:5432/dbtf34mitep4vm')
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
 }
-
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
 
 
 
