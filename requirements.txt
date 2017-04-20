@@ -2,7 +2,7 @@ appdirs==1.4.3
 behave==1.2.5
 behave-django==0.4.0
 dj-database-url==0.4.2
-Django==1.8.5
+Django==1.10.5
 factory-boy==2.7.0
 fake-factory==0.6.0
 gunicorn==19.7.1
@@ -15,3 +15,4 @@ python-dateutil==2.5.3
 selenium==2.53.6
 six==1.10.0
 sqlparse==0.2.3
+whitenoise==3.3.0
