@@ -1,7 +1,7 @@
 {% load staticfiles %}
 <html>
     <head>
-        <title>Trabalho LES</title>
+        <title>{% block title %}{% endblock %}</title>
 
         <meta charset="UTF-8" />
         <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}" >
@@ -12,8 +12,9 @@
 
         <main>
         <div class="container" >
-            <h1>Hello world!</h1>
+            {% block content %}
         </div>
+            {% endblock %}
         </main>
         <script type="text/javascript" src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
         <script type="text/javascript" src="{% static 'js/bootstrap.js' %}"></script>

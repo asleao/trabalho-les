@@ -4,4 +4,5 @@ from project_manager.views import *
 
 urlpatterns = [
     url(r'^$', hello_world ),
+    url(r'^ferramenta/$', cadastro_ferramenta, name='cadastro_ferramenta' ),
 ]
