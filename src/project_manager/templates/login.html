@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}Login{% endblock %}
+
+{% block content %}
+    <div id="content-container" class="container">        
+            <form id="login-form" method="post" class="col s12"
+                  action="{% url 'login' %}">
+                 <a id="cadastrar" name="cadastrar" class="btn btn-primary" href="{% url 'cadastro_usuario' %}" role="button">Cadastre-se</a>
+            </form>        
+    </div>
+{% endblock content %}

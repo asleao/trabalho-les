@@ -1,4 +1,7 @@
 from django.shortcuts import render
 
-def hello_world(request):
-    return render(request, 'base.html')
+def login(request):
+    return render(request, 'login.html')
+
+def cadastro_usuario(request):
+    return render(request, 'cadastro_usuario.html')

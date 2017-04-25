@@ -3,5 +3,6 @@ from django.contrib import admin
 from project_manager.views import *
 
 urlpatterns = [
-    url(r'^$', hello_world ),
+    url(r'^$', login, name="login"),
+    url(r'^cadastro$', cadastro_usuario, name="cadastro_usuario"),
 ]
