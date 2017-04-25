@@ -19,4 +19,7 @@ class FormCadastroUsuario(forms.ModelForm):
             'username': 'Matricula:',
             'email': 'E-mail:',
             'password': 'Senha:',
-        }       
+        }   
+        help_texts={
+            'username':'',
+        }    
