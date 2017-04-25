@@ -16,7 +16,7 @@ class FormCadastroUsuario(forms.ModelForm):
         labels ={
             'first_name': 'Nome:',
             'last_name': 'Sobrenome:',
-            'username': 'Matrícula:',
+            'username': 'Matricula:',
             'email': 'E-mail:',
             'password': 'Senha:',
         }       
