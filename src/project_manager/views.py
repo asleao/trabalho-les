@@ -1,4 +1,8 @@
 from django.shortcuts import render
+from .forms import FormCadastroUsuario
+from django.views.decorators.csrf import csrf_protect
+from django.contrib.auth.models import User
+from django.http import HttpResponseRedirect
 
 
 def cadastro_ferramenta(request):
@@ -8,6 +12,22 @@ def cadastro_ferramenta(request):
 def login(request):
     return render(request, 'login.html')
 
-
+@csrf_protect
 def cadastro_usuario(request):
-    return render(request, 'cadastro_usuario.html')
+    if request.method == 'POST':
+    	form = FormCadastroUsuario(request.POST)
+    	if form.is_valid():
+            nome = form.cleaned_data['first_name']
+            sobrenome = form.cleaned_data['last_name']
+            matricula = form.cleaned_data['username']
+            email = form.cleaned_data['email']
+            senha = form.cleaned_data['password']
+            user = User.objects.create_user(matricula, email, senha)
+            user.last_name=sobrenome
+            user.first_name=nome
+            user.save()
+            return HttpResponseRedirect(request.POST.get('next'))
+    else:
+    	form = FormCadastroUsuario()
+
+    return render(request, 'cadastro_usuario.html',{'form':form})

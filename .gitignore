@@ -66,3 +66,6 @@ virtual/
 
 #PyCharm
 .idea/
+
+#sqlite
+db.sqlite3
