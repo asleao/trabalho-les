@@ -134,3 +134,5 @@ STATICFILES_DIRS = (
 )
 
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
+ADMIN_SITE_HEADER = "LedsZeppellin"
