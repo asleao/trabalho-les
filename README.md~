@@ -12,3 +12,6 @@ Gabriel Luiz
 Relatório: https://drive.google.com/open?id=1ar6-_WCrLeCsOHKxWOaH4wbZxHwsRf-b2rjKorxYOAg
 
 Github microserviço GoogleDrive: https://github.com/gabriellmb05/api-drive
+
+link heroku 1 (projeto principal): https://trabalho-lesw.herokuapp.com/
+link heroku 2 (web service GoogleDrive): https://api-drive.herokuapp.com/
