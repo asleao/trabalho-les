@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.conf import settings
 
 urlpatterns = [
-    url(r'', admin.site.urls),
+    url(r'^admin/', admin.site.urls),
     url(r'', include('project_manager.urls')),
 ]
 
