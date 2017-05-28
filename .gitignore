@@ -69,3 +69,5 @@ virtual/
 
 #sqlite
 db.sqlite3
+
+.sonar/
