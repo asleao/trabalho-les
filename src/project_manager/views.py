@@ -1,8 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .forms import FormCadastroUsuario
 from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth.models import User
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
+from django.contrib.auth import authenticate, login
 
 
 def cadastro_ferramenta(request):
@@ -31,3 +32,13 @@ def cadastro_usuario(request):
     	form = FormCadastroUsuario()
 
     return render(request, 'cadastro_usuario.html',{'form':form})
+
+def autoriza_usuario(request):
+    user = request.user
+    user.is_superuser = True
+    user.is_staff = True
+
+    user.save()
+
+
+    return redirect('/')
