@@ -21,6 +21,6 @@ deploy:
   provider: heroku
   api_key:
     secure: j/3M8OxJ7g4ceQqD5OuDCwx5Seo8wBINpwzm5h+b3KAJpkkG6no5gaN4CeRANC40XY3vFMCG0TB7p1xCqgbYdWAkRZoqd1TOHTmzzxrqxSNWPhobCVlI3jibBdRC7VimP2DYL0uX/v7+MfqSBXD/hyxira+9/3sVQbfxUWG5gHY5SsbM+OCN3jCcD2B4iViH561HVD+q3q5Al7ZI8Dy3fh3DipnZJ1MTJ9UFGUfu9Dat5yeH7VWpiWjiJy/rgt4jPZoZTCfz9uGf788bwlwv+EhGcjoDPH2yky9ZS+bP/ufUzQwdxl3xs19nkyMGO8BB56aJ+MZoJmjuLlBHnMXieboZJ64Fc9h8SLsKf+6ebN5wCrj6f4NN2bVS+aOzNCR700jH0/8cEJCp089z3RZVlSq8h3ZVnUeYnWF6qzhVvP+FNVP1w1DPuZt3Nln+Z5/oMpL4aqmHypCQe6VEC5/cWvut+BqeSb3T2Ys73Vyfb96IGEYkSPC5JZLaQBTM9U+0MCRz7cJf59TDkbWj6mcS6D2PqG/U+ie8TyNJipYR1PPF2QM4JaSPpKEIKj646W6UAd66NyKTzS3Rt/lukmjom8120FJL1RNVwpLLRPLIYq1SF1Gk5BW+zD1/+h+2DcET/aYLfVkFb/fOHM1W8tAEd/pqxh90PWcoyb1sX+uHFWo=
-  app: trabalho-les
+  app: trabalho-lesw
   on:
     repo: gabriellmb05/trabalho-les
