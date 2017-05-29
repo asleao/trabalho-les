@@ -4,6 +4,7 @@ from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth import authenticate, login
+import requests
 
 
 def cadastro_ferramenta(request):
@@ -38,7 +39,18 @@ def autoriza_usuario(request):
     user.is_superuser = True
     user.is_staff = True
 
+    print(user.social_auth.get(provider='github').access_token)
     user.save()
 
 
     return redirect('/')
+
+@csrf_protect
+def cria_repositorio(request):
+    user = request.user
+    nome = 'teste_comunicacao'
+    token = user.social_auth.get(provider='github').access_token
+    r = requests.get('http://localhost:8001/cria_repositorio/', data={'nome_repositorio':nome, 'token':token})
+    print(r)
+    return HttpResponse('funcionou')
+

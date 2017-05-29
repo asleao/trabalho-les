@@ -160,3 +160,11 @@ LOGIN_REDIRECT_URL = 'autoriza_usuario'
 
 SOCIAL_AUTH_GITHUB_KEY = 'b1d083e02e332d5df8d0'
 SOCIAL_AUTH_GITHUB_SECRET = 'ee5ea55fa38b0851f16e1233590981401b90ae37'
+
+SOCIAL_AUTH_GITHUB_SCOPE = [
+    'user',
+    'read:org',
+    'public_repo',
+    'admin:repo_hook',
+    'admin:org',
+]
