@@ -48,9 +48,10 @@ def autoriza_usuario(request):
 @csrf_protect
 def cria_repositorio(request):
     user = request.user
-    nome = 'teste_add_collaborator'
+    nome = 'auto_init'
     token = user.social_auth.get(provider='github').access_token
-    r = requests.post('http://localhost:8000/cria_repositorio/', data={'nome_repositorio':nome, 'token':token})
+    linguagem_gitignore = 'Python'
+    r = requests.post('http://localhost:8001/cria_repositorio/', data={'nome_repositorio':nome, 'token':token, 'linguagem':linguagem_gitignore})
     print(r)
     print(user.social_auth.get(provider='github').access_token)
     return HttpResponse('funcionou')
@@ -60,7 +61,7 @@ def adiciona_colaboradores(request):
     nome = 'teste_add_collaborator'
     colaboradores = {'usuario1':'asleao', 'usuario2':'paulossjunior'}
     token = user.social_auth.get(provider='github').access_token
-    r = requests.post('http://localhost:8000/adiciona_colaboradores/', data={'nome_repositorio':nome, 'token':token, 'colaboradores':json.dumps(colaboradores)})
+    r = requests.post('http://localhost:8001/adiciona_colaboradores/', data={'nome_repositorio':nome, 'token':token, 'colaboradores':json.dumps(colaboradores)})
     return HttpResponse('funcionou')
 
 def remove_colaboradores(request):
@@ -68,6 +69,6 @@ def remove_colaboradores(request):
     nome = 'teste_add_collaborator'
     colaboradores = {'usuario1':'asleao', 'usuario2':'paulossjunior'}
     token = user.social_auth.get(provider='github').access_token
-    r = requests.post('http://localhost:8000/remove_colaboradores/', data={'nome_repositorio':nome, 'token':token, 'colaboradores':json.dumps(colaboradores)})
+    r = requests.post('http://localhost:8001/remove_colaboradores/', data={'nome_repositorio':nome, 'token':token, 'colaboradores':json.dumps(colaboradores)})
     return HttpResponse('funcionou')
 
