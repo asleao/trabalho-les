@@ -6,6 +6,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth import authenticate, login
 import requests
 import json
+from .models import *
 
 def cadastro_ferramenta(request):
     return render(request, 'cadastro_ferramenta.html')
@@ -45,10 +46,10 @@ def autoriza_usuario(request):
 
     return redirect('/')
 
-@csrf_protect
-def cria_repositorio(request):
-    user = request.user
-    nome = 'auto_init'
+def cria_repositorio(id_projeto, user_root):
+    user = user_root
+    projeto = Projeto.objects.get(pk=id_projeto)
+    nome = projeto.nome
     token = user.social_auth.get(provider='github').access_token
     linguagem_gitignore = 'Python'
     r = requests.post('http://localhost:8001/cria_repositorio/', data={'nome_repositorio':nome, 'token':token, 'linguagem':linguagem_gitignore})
@@ -56,12 +57,16 @@ def cria_repositorio(request):
     print(user.social_auth.get(provider='github').access_token)
     return HttpResponse('funcionou')
 
-def adiciona_colaboradores(request):
-    user = request.user
-    nome = 'teste_add_collaborator'
-    colaboradores = {'usuario1':'asleao', 'usuario2':'paulossjunior'}
+def adiciona_colaboradores(id_projeto, user_root):
+    list_participantes = []
+    user = user_root
+    projeto = Projeto.objects.get(pk=id_projeto)
+    nome = projeto.nome
+    colaboradores = list(projeto.participantes.all())
+    for colaborador in colaboradores:
+        list_participantes.append(colaborador.username)
     token = user.social_auth.get(provider='github').access_token
-    r = requests.post('http://localhost:8001/adiciona_colaboradores/', data={'nome_repositorio':nome, 'token':token, 'colaboradores':json.dumps(colaboradores)})
+    r = requests.post('http://localhost:8001/adiciona_colaboradores/', data={'nome_repositorio':nome, 'token':token, 'colaboradores':json.dumps(list_participantes)})
     return HttpResponse('funcionou')
 
 def remove_colaboradores(request):
