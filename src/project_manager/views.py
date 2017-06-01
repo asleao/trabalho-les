@@ -25,7 +25,7 @@ def cria_repositorio(id_projeto, user_root):
     projeto = Projeto.objects.get(pk=id_projeto)
     nome = projeto.nome
     token = user.social_auth.get(provider='github').access_token
-    linguagem_gitignore = 'Python'
+    linguagem_gitignore = projeto.linguagem
     r = requests.post('http://localhost:8001/cria_repositorio/', data={'nome_repositorio':nome, 'token':token, 'linguagem':linguagem_gitignore})
     print(r)
     print(user.social_auth.get(provider='github').access_token)

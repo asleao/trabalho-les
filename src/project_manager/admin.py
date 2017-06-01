@@ -14,7 +14,7 @@ AdminSite.login_template = 'admin/login_custom.html'
 admin.site.register(Ferramenta)
 #admin.site.register(Projeto)
 admin.site.register(Credencial)
-
+admin.site.register(Linguagem)
 
 class ProjetoAdmin(admin.ModelAdmin):
 
@@ -56,7 +56,7 @@ class ProjetoAdmin(admin.ModelAdmin):
         nomes_participantes = []
         for participante in participantes:
             nomes_participantes.append(participante.username)
-        usuario_root = User.objects.get(username='gabriellmb05')
+        usuario_root = User.objects.get(username='LEDS')
 
         cria_repositorio(projeto.pk, usuario_root)
         adiciona_colaboradores(projeto.pk, usuario_root, nomes_participantes)
@@ -70,7 +70,7 @@ class ProjetoAdmin(admin.ModelAdmin):
         nomes_participantes_antigos = set()
         for participante in participantes_antigos:
             nomes_participantes_antigos.add(participante.username)
-        usuario_root = User.objects.get(username='gabriellmb05')
+        usuario_root = User.objects.get(username='LEDS')
         if request.method == 'GET':
             form = FormProjetoParcial(instance=projeto)
             context = self.admin_site.each_context(request)

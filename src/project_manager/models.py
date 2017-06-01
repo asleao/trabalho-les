@@ -17,12 +17,21 @@ class Credencial(models.Model):
     def __str__(self):
         return self.ferramenta.nome
 
+class Linguagem(models.Model):
+    nome = models.CharField(max_length=60, blank=False, unique=True)
+
+    def __str__(self):
+        return self.nome
+
 class Projeto(models.Model):
     nome = models.CharField(max_length=60, blank=False, unique=True)
     ferramentas = models.ManyToManyField(Ferramenta, related_name='ferramentas')
     participantes = models.ManyToManyField(User, related_name='participantes')
     dono = models.ForeignKey(User, on_delete=models.CASCADE, related_name='dono')
+    linguagem = models.ForeignKey(Linguagem, on_delete=models.CASCADE, related_name='linguagem')
 
     def __str__(self):
         return self.nome
+
+
 
