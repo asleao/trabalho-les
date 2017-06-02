@@ -167,4 +167,5 @@ SOCIAL_AUTH_GITHUB_SCOPE = [
     'public_repo',
     'admin:repo_hook',
     'admin:org',
+    'user:email'
 ]

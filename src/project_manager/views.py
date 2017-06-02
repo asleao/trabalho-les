@@ -7,7 +7,7 @@ from django.contrib.auth import authenticate, login
 import requests
 import json
 from .models import *
-
+from taiga import TaigaAPI
 
 def autoriza_usuario(request):
     user = request.user
@@ -55,3 +55,10 @@ def remove_colaboradores(id_projeto, user_root, participantes):
     r = requests.post('http://localhost:8001/remove_colaboradores/', data={'nome_repositorio':nome, 'token':token, 'colaboradores':json.dumps(list_participantes)})
     return HttpResponse('funcionou')
 
+def taiga(request):
+    user = User.objects.get(username='gabriellmb05')
+    token = user.social_auth.get(provider='github').access_token
+    print(token)
+    #api = TaigaAPI(token=token, token_type='github')
+    #print(api.me())
+    return HttpResponse('funcionou')
