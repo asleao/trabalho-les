@@ -16,7 +16,7 @@ branches:
 install:
 - pip install -r requirements.txt
 script:
-- python manage.py behave
+- python3 src/manage.py behave
 - sonar-scanner -Dsonar.login=$SONAR_TOKEN
 deploy:
   provider: heroku
