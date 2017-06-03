@@ -6,9 +6,7 @@ def step_impl(context):
     if br.current_url.endswith('/') != True:
         br.find_element_by_id('login_field').send_keys('leds')
         br.find_element_by_id('password').send_keys('leds2013ifesbr')
-        br.get_screenshot_as_file('/home/gabriel/gabriel/Imagens/screenshot.png')
         br.find_element_by_name('commit').click()
-        br.get_screenshot_as_file('/home/gabriel/gabriel/Imagens/screenshot2.png')
         if br.current_url.endswith('/') != True:
 
             br.find_element_by_name('authorize').click()
