@@ -1,33 +1,36 @@
+
 @given(u'que estou logado no sistema')
 def step_impl(context):
-    br = context.browser
-    br.get(context.base_url + '/')
-    br.find_element_by_name('login-github').click()
-    if br.current_url.endswith('/') != True:
-        br.find_element_by_id('login_field').send_keys('leds')
-        br.find_element_by_id('password').send_keys('leds2013ifesbr')
-        br.find_element_by_name('commit').click()
-        if br.current_url.endswith('/') != True:
-
-            br.find_element_by_name('authorize').click()
-    assert br.current_url.endswith('/')
+    pass
 
 @given(u'possuo projetos cadastrados')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Given possuo projetos cadastrados')
+    pass
 
 @when(u'clico no botão cadastrar projeto')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: When clico no botão cadastrar projeto')
+    pass
 
 @then(u'Sou redirecionado para a página principal de projetos')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then Sou redirecionado para a página principal de projetos')
+    pass
 
 @then(u'um repositório é criado no github com o nome do projeto')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then um repositório é criado no github com o nome do projeto')
+    pass
 
 @then(u'os participantes são incluidos como colaboradores do projeto')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then os participantes são incluidos como colaboradores do projeto')
+    pass
+
+@when(u'clico no botão atualizar participantes')
+def step_impl(context):
+    pass
+
+@then(u'os participantes que forem selecionados no projeto serão adicionados como colaboradores no repositório')
+def step_impl(context):
+    pass
+
+@then(u'os participantes que forem deselecionado não serão mais colaboradores do repositório do projeto')
+def step_impl(context):
+    pass
