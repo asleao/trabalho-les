@@ -26,7 +26,7 @@ def cria_repositorio(id_projeto, user_root):
     nome = projeto.nome
     token = user.social_auth.get(provider='github').access_token
     linguagem_gitignore = projeto.linguagem
-    r = requests.post('http://localhost:8001/cria_repositorio/', data={'nome_repositorio':nome, 'token':token, 'linguagem':linguagem_gitignore})
+    r = requests.post('https://api-git.herokuapp.com/cria_repositorio/', data={'nome_repositorio':nome, 'token':token, 'linguagem':linguagem_gitignore})
     print(r)
     print(user.social_auth.get(provider='github').access_token)
     return HttpResponse('funcionou')
@@ -40,7 +40,7 @@ def adiciona_colaboradores(id_projeto, user_root, participantes):
     for colaborador in colaboradores:
         list_participantes.append(colaborador)
     token = user.social_auth.get(provider='github').access_token
-    r = requests.post('http://localhost:8001/adiciona_colaboradores/', data={'nome_repositorio':nome, 'token':token, 'colaboradores':json.dumps(list_participantes)})
+    r = requests.post('https://api-git.herokuapp.com/adiciona_colaboradores/', data={'nome_repositorio':nome, 'token':token, 'colaboradores':json.dumps(list_participantes)})
     return HttpResponse('funcionou')
 
 def remove_colaboradores(id_projeto, user_root, participantes):
@@ -52,13 +52,5 @@ def remove_colaboradores(id_projeto, user_root, participantes):
     for colaborador in colaboradores:
         list_participantes.append(colaborador)
     token = user.social_auth.get(provider='github').access_token
-    r = requests.post('http://localhost:8001/remove_colaboradores/', data={'nome_repositorio':nome, 'token':token, 'colaboradores':json.dumps(list_participantes)})
-    return HttpResponse('funcionou')
-
-def taiga(request):
-    user = User.objects.get(username='gabriellmb05')
-    token = user.social_auth.get(provider='github').access_token
-    print(token)
-    #api = TaigaAPI(token=token, token_type='github')
-    #print(api.me())
+    r = requests.post('https://api-git.herokuapp.com/remove_colaboradores/', data={'nome_repositorio':nome, 'token':token, 'colaboradores':json.dumps(list_participantes)})
     return HttpResponse('funcionou')
