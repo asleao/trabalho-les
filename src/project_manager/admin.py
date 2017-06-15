@@ -49,20 +49,16 @@ class ProjetoAdmin(admin.ModelAdmin):
 
 
 
+
     def cadastrar_projeto(self, request, pk, *args, **kwargs):
         projeto = Projeto.objects.get(pk=pk)
-        nome_projeto = projeto.nome
-        participantes = list(projeto.participantes.all())
-        nomes_participantes = []
-        for participante in participantes:
-            nomes_participantes.append(participante.username)
-        usuario_root = User.objects.get(username='LEDS')
+        ferramentas = projeto.ferramentas
 
-        cria_repositorio(projeto.pk, usuario_root)
-        adiciona_colaboradores(projeto.pk, usuario_root, nomes_participantes)
+        for ferramenta in list(ferramentas.all()):
+            criar_projeto_ferramenta(projeto, ferramenta)
+
+
         return HttpResponseRedirect('/project_manager/projeto')
-
-
 
     def atualizar_participantes(self, request, pk, *args, **kwargs):
         projeto = Projeto.objects.get(pk=pk)
@@ -94,9 +90,9 @@ class ProjetoAdmin(admin.ModelAdmin):
                 print(nomes_participantes_antigos)
                 print(nomes_participantes_novos)
                 if lista_remocao != set():
-                    remove_colaboradores(projeto.pk,usuario_root, lista_remocao)
+                    remove_colaboradores_github(projeto.pk,usuario_root, lista_remocao)
                 if lista_adicao != set():
-                    adiciona_colaboradores(projeto.pk, usuario_root, lista_adicao)
+                    adiciona_colaboradores_github(projeto.pk, usuario_root, lista_adicao)
                 projeto.participantes = form.cleaned_data['participantes']
                 projeto.save()
 
