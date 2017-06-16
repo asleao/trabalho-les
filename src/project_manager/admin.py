@@ -62,10 +62,8 @@ class ProjetoAdmin(admin.ModelAdmin):
 
     def atualizar_participantes(self, request, pk, *args, **kwargs):
         projeto = Projeto.objects.get(pk=pk)
+        ferramentas = projeto.ferramentas
         participantes_antigos = set(list(projeto.participantes.all()))
-        nomes_participantes_antigos = set()
-        for participante in participantes_antigos:
-            nomes_participantes_antigos.add(participante.username)
         usuario_root = User.objects.get(username='LEDS')
         if request.method == 'GET':
             form = FormProjetoParcial(instance=projeto)
@@ -82,17 +80,14 @@ class ProjetoAdmin(admin.ModelAdmin):
             if form.is_valid():
 
                 participantes_novos = set(list(form.cleaned_data['participantes'].all()))
-                nomes_participantes_novos = set()
-                for participante in participantes_novos:
-                    nomes_participantes_novos.add(participante.username)
-                lista_remocao = nomes_participantes_antigos.difference(nomes_participantes_novos)
-                lista_adicao = nomes_participantes_novos.difference(nomes_participantes_antigos)
-                print(nomes_participantes_antigos)
-                print(nomes_participantes_novos)
-                if lista_remocao != set():
-                    remove_colaboradores_github(projeto.pk,usuario_root, lista_remocao)
-                if lista_adicao != set():
-                    adiciona_colaboradores_github(projeto.pk, usuario_root, lista_adicao)
+                for ferramenta in list(ferramentas.all()):
+                    atualizar_participantes_ferramenta(participantes_antigos, participantes_novos, ferramenta, projeto)
+                #lista_remocao = nomes_participantes_antigos.difference(nomes_participantes_novos)
+                #lista_adicao = nomes_participantes_novos.difference(nomes_participantes_antigos)
+                #if lista_remocao != set():
+                 #   remove_colaboradores_github(projeto.pk,usuario_root, lista_remocao)
+                #if lista_adicao != set():
+                   # adiciona_colaboradores_github(projeto.pk, usuario_root, lista_adicao)
                 projeto.participantes = form.cleaned_data['participantes']
                 projeto.save()
 
