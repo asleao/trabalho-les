@@ -45,8 +45,8 @@ def cria_repositorio_github(id_projeto, user_root):
     nome = projeto.nome
     token = user.social_auth.get(provider='github').access_token
     linguagem_gitignore = projeto.linguagem
-    r = requests.post('https://api-git.herokuapp.com/cria_repositorio/', data={'nome_repositorio':nome, 'token':token, 'linguagem':linguagem_gitignore})
-    print(r)
+    # r = requests.post('https://api-git.herokuapp.com/cria_repositorio/', data={'nome_repositorio':nome, 'token':token, 'linguagem':linguagem_gitignore})
+    # print(r)
     return HttpResponse('funcionou')
 
 def adiciona_colaboradores_github(id_projeto, user_root, participantes):
@@ -58,8 +58,8 @@ def adiciona_colaboradores_github(id_projeto, user_root, participantes):
     for colaborador in colaboradores:
         list_participantes.append(colaborador)
     token = user.social_auth.get(provider='github').access_token
-    r = requests.post('https://api-git.herokuapp.com/adiciona_colaboradores/', data={'nome_repositorio':nome, 'token':token, 'colaboradores':json.dumps(list_participantes)})
-    print(r)
+    # r = requests.post('https://api-git.herokuapp.com/adiciona_colaboradores/', data={'nome_repositorio':nome, 'token':token, 'colaboradores':json.dumps(list_participantes)})
+    # print(r)
     return HttpResponse('funcionou')
 
 def remove_colaboradores_github(id_projeto, user_root, participantes):
@@ -91,7 +91,7 @@ def adiciona_colaboradores_taiga(id_projeto, user_root, participantes):
     list_participantes = []
     user = user_root
     projeto = Projeto.objects.get(pk=id_projeto)
-    nome = projeto.nome
+    nome = 'lesw-'+projeto.nome.replace(" ","-").lower()
     colaboradores = participantes
     for colaborador in colaboradores:
         list_participantes.append(colaborador)

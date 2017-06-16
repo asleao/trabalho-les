@@ -11,7 +11,7 @@ class Ferramenta(models.Model):
 class Credencial(models.Model):
     user_name =  models.CharField(max_length=60, blank=False, unique=True)
     password = models.CharField(max_length=255, blank=False)
-    token = models.CharField(max_length=60, blank=True, unique=True)
+    token = models.CharField(max_length=150, blank=True, unique=True)
     agente = models.ForeignKey(User, on_delete=models.CASCADE)
     ferramenta = models.ForeignKey(Ferramenta, on_delete=models.CASCADE)
 
