@@ -31,13 +31,13 @@ def criar_projeto_ferramenta(projeto_obj, ferramenta_obj):
         participantes_username.append(participante.username)
     print(ferramenta_obj.nome)
     if ferramenta_obj.nome == 'Github':
-            cria_repositorio_github(projeto_obj.id, user_root)
-            adiciona_colaboradores_github(projeto_obj.id, user_root, participantes_username)
+        cria_repositorio_github(projeto_obj.id, user_root)
+        adiciona_colaboradores_github(projeto_obj.id, user_root, participantes_username)
     elif(ferramenta_obj.nome == 'Taiga'):
-            cria_projeto_taiga(projeto_obj.id, user_root)
-            adiciona_colaboradores_taiga(projeto_obj.id, user_root, participantes_email)
+        cria_projeto_taiga(projeto_obj.id, user_root)
+        adiciona_colaboradores_taiga(projeto_obj.id, user_root, participantes_email)
     else:
-            print('ferramenta inválida!')
+        print('ferramenta inválida!')
 
 def cria_repositorio_github(id_projeto, user_root):
     user = user_root
