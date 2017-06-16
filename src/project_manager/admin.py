@@ -82,23 +82,10 @@ class ProjetoAdmin(admin.ModelAdmin):
                 participantes_novos = set(list(form.cleaned_data['participantes'].all()))
                 for ferramenta in list(ferramentas.all()):
                     atualizar_participantes_ferramenta(participantes_antigos, participantes_novos, ferramenta, projeto)
-                #lista_remocao = nomes_participantes_antigos.difference(nomes_participantes_novos)
-                #lista_adicao = nomes_participantes_novos.difference(nomes_participantes_antigos)
-                #if lista_remocao != set():
-                 #   remove_colaboradores_github(projeto.pk,usuario_root, lista_remocao)
-                #if lista_adicao != set():
-                   # adiciona_colaboradores_github(projeto.pk, usuario_root, lista_adicao)
+
                 projeto.participantes = form.cleaned_data['participantes']
                 projeto.save()
 
         return HttpResponseRedirect('/project_manager/projeto')
 
-
-#    def save_model(self, request, obj, form, change):
-
-#       obj.save()
 admin.site.register(Projeto, ProjetoAdmin)
-
-
-
-

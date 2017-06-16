@@ -49,24 +49,22 @@ def atualizar_participantes_ferramenta(participantes_antigos, participantes_novo
     participantes_email_novos = set()
     print(ferramenta.nome)
     if ferramenta.nome == 'Github':
-        for participante in participantes_antigos:
-            participantes_username_antigos.add(participante.username)
-        for participante in participantes_novos:
-            participantes_username_novos.add(participante.username)
+        participantes_username_antigos = gera_lista_participantes(participantes_antigos,"username")
+        participantes_username_novos = gera_lista_participantes(participantes_novos,"username")
+        
         lista_remocao = participantes_username_antigos.difference(participantes_username_novos)
         lista_adicao = participantes_username_novos.difference(participantes_username_antigos)
         if lista_remocao != set():
            remove_colaboradores_github(projeto.pk,usuario_root, lista_remocao)
         if lista_adicao != set():
            adiciona_colaboradores_github(projeto.pk, usuario_root, lista_adicao)
-    elif(ferramenta.nome == 'Taiga'):        
-        for participante in participantes_antigos:
-            participantes_email_antigos.add(participante.email)
-        for participante in participantes_novos:
-            participantes_email_novos.add(participante.email)
+    elif(ferramenta.nome == 'Taiga'):  
+        participantes_email_antigos = gera_lista_participantes(participantes_antigos,"email")
+        participantes_email_novos = gera_lista_participantes(participantes_novos,"email")      
+        
         lista_remocao = participantes_email_antigos.difference(participantes_email_novos)
         lista_adicao = participantes_email_novos.difference(participantes_email_antigos)
-        
+
         if lista_remocao != set():           
            remove_colaboradores_taiga(projeto.pk,usuario_root, lista_remocao)
         if lista_adicao != set():           
@@ -74,7 +72,18 @@ def atualizar_participantes_ferramenta(participantes_antigos, participantes_novo
     else:
         print('ferramenta inválida!')
 
-
+def gera_lista_participantes(lista_particantes,atributo):
+    participantes = set()
+    if(atributo=="username"):
+        for participante in lista_particantes:
+            participantes.add(participante.username)    
+        return participantes
+    elif(atributo=="email"):
+        for participante in lista_particantes:
+            participantes.add(participante.email)    
+        return participantes
+    else:
+        print("Atributo inválido")
 def cria_repositorio_github(id_projeto, user_root):
     user = user_root
     projeto = Projeto.objects.get(pk=id_projeto)
