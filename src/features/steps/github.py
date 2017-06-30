@@ -1,22 +1,64 @@
 from features.factories.user import UserFactory
 from features.factories.linguagem import LinguagemFactory
 from features.factories.ferramenta import FerramentaFactory
-
+from django.contrib.auth.models import User
+from project_manager.models import *
 
 
 @given(u'que estou logado no sistema')
 def step_impl(context):
     user = UserFactory()
     user.save()
+    print(user.username)
+    assert user.username == "user_000"
+
+
+def cria_ferramentas():
+    ferramentas = []
+    ferramentas.append(FerramentaFactory(nome='Taiga', link='www.taiga.io'))
+    ferramentas.append(FerramentaFactory(nome='Github', link='www.github.com'))
+    return ferramentas
+
+
+def salva_ferramentas(ferramentas):
+    for ferramenta in ferramentas:
+        ferramenta.save
+
+
+def cria_particiantes():
+    participantes = []
+    participantes.append(UserFactory())
+    return participantes
+
+
+def salva_participantes(participantes):
+    for participante in participantes:
+        participante.save()
+
+
+def cadastra_projeto(nome_projeto):
+    nome = nome_projeto
+    ferramentas = cria_ferramentas()
+    salva_ferramentas(ferramentas)
+    participantes = cria_particiantes()
+    salva_participantes(participantes)
     linguagem = LinguagemFactory()
     linguagem.save()
-    ferramenta = FerramentaFactory()
-    ferramenta.save()
+    dono = User.objects.get(username='user_000')
+    projeto = Projeto.objects.create(nome=nome, dono=dono, linguagem=linguagem)
+    projeto.ferramentas = ferramentas
+    projeto.participantes = participantes
+    projeto.save
+    return projeto
 
 
 @given(u'possuo projetos cadastrados')
 def step_impl(context):
-    pass
+    projeto1 = cadastra_projeto('Projeto_Behave1')
+    projeto2 = cadastra_projeto('Projeto_Behave2')
+
+    assert projeto1.nome == Projeto.objects.get(nome='Projeto_Behave1').nome
+    assert projeto2.nome == Projeto.objects.get(nome='Projeto_Behave2').nome
 
 
 @when(u'clico no botão cadastrar projeto')
