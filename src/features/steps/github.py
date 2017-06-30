@@ -1,5 +1,7 @@
 from features.factories.user import UserFactory
 from features.factories.linguagem import LinguagemFactory
+from features.factories.ferramenta import FerramentaFactory
+
 
 
 @given(u'que estou logado no sistema')
@@ -7,9 +9,9 @@ def step_impl(context):
     user = UserFactory()
     user.save()
     linguagem = LinguagemFactory()
-    assert linguagem.nome == 'Python'
-
-    pass
+    linguagem.save()
+    ferramenta = FerramentaFactory()
+    ferramenta.save()
 
 
 @given(u'possuo projetos cadastrados')
