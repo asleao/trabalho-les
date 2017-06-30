@@ -1,12 +1,13 @@
 from features.factories.user import UserFactory
+from features.factories.ferramenta import FerramentaFactory
 
 
 @given(u'que estou logado no sistema')
 def step_impl(context):
     user = UserFactory()
-
-    print(user.name)
-    pass
+    user.save()
+    ferramenta = FerramentaFactory()
+    ferramenta.save()
 
 
 @given(u'possuo projetos cadastrados')
