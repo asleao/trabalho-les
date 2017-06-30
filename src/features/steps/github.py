@@ -1,11 +1,14 @@
 from features.factories.user import UserFactory
+from features.factories.linguagem import LinguagemFactory
 
 
 @given(u'que estou logado no sistema')
 def step_impl(context):
     user = UserFactory()
+    user.save()
+    linguagem = LinguagemFactory()
+    assert linguagem.nome == 'Python'
 
-    print(user.name)
     pass
 
 
