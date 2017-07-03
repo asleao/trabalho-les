@@ -1,28 +1,82 @@
 from features.factories.user import UserFactory
 from features.factories.linguagem import LinguagemFactory
 from features.factories.ferramenta import FerramentaFactory
+from features.factories.credencial import CredencialFactory
 from django.contrib.auth.models import User
 from project_manager.models import *
+from project_manager.views import *
 
 
-@given(u'que estou logado no sistema')
+@given(u'possuo usuarios cadastrados no sistema')
+def step_impl(context):
+    user_leao = UserFactory(username='asleao', email='andre.sp.leao@gmail.com', password='admin123')
+    user_gabriel = UserFactory(username='gabriellmb05', email='gabriel.luiz.mb@gmail.com', password='admin123')
+    user_root = UserFactory(username='LEDS', email='ledsifes@gmail.com', password='admin123')
+
+    lista_usuarios = [user_leao, user_gabriel, user_root]
+
+    salva_participantes(lista_usuarios)
+
+    assert len(User.objects.all()) == 3
+
+
+@given(u'possuo linguagens cadastradas no sistema')
+def step_impl(context):
+    linguagem = LinguagemFactory(nome='Python')
+
+    linguagem.save()
+
+    assert len(Linguagem.objects.all()) == 1
+
+
+@given(u'possuo a ferramenta do Github cadastrada no sistema')
+def step_impl(context):
+    ferramenta = FerramentaFactory(nome='Github', link='www.github.com')
+    ferramenta.save()
+
+    assert len(Ferramenta.objects.all()) == 1
+
+
+@given(u'possuo credencial cadastrada do usuario root')
+def step_impl(context):
+    user_root = User.objects.get(username='LEDS')
+    ferramenta = Ferramenta.objects.get(nome='Github')
+    credencial = CredencialFactory(user_name=user_root.username, token='0a4615e6a9fcf24a45a2c0336a6ac8b41f696efd', agente=user_root, ferramenta=ferramenta)
+
+    assert len(Credencial.objects.all()) == 1
+
+
+@given(u'possuo projetos cadastrados no sistema')
+def step_impl(context):
+    lista_participantes = []
+    lista_participantes.append(User.objects.get(username='asleao'))
+    lista_participantes.append(User.objects.get(username='gabriellmb05'))
+    projeto = cria_projeto('Projeto Behave Teste', lista_participantes)
+
+    assert len(Projeto.objects.all()) == 1
+
+
+@when(u'chamo a funcao cadastrar projeto')
+def step_impl(context):
+    projeto = Projeto.objects.get(nome='Projeto Behave Teste')
+    user_root = User.objects.get(username='LEDS')
+    ferramenta = Ferramenta.objects.get(nome='Github')
+    credencial = Credencial.objects.get(agente=user_root, ferramenta=ferramenta)
+    #request = api_github_repositorio_request(projeto.nome, credencial.token, projeto.linguagem)
+
+    #assert request.status_code == 500
+    pass
+
+
+@then(u'O projeto é cadastrado no Github')
 def step_impl(context):
     pass
-    '''user = User.objects.get(username='admin')
-    br = context.browser
-    br.get(context.base_url + '/')
 
-    # Checks for Cross-Site Request Forgery protection input
-    assert br.find_element_by_name('csrfmiddlewaretoken').is_enabled()
 
-    # Fill login form and submit it (valid version)
+@then(u'recebo um retorno http 200 da request')
+def step_impl(context):
+    pass
 
-    br.find_element_by_name('username').send_keys('admin')
-    br.find_element_by_name('password').send_keys('admin123')
-    br.find_element_by_name('submit').click()
-    br.get_screenshot_as_file('/tmp/screenshot.png')
-    assert user.username == "user_000"
-    '''
 
 def cria_ferramentas():
     ferramentas = []
@@ -47,67 +101,14 @@ def salva_participantes(participantes):
         participante.save()
 
 
-def cadastra_projeto(nome_projeto):
+def cria_projeto(nome_projeto, participantes):
+    ferramenta = []
     nome = nome_projeto
-    ferramentas = cria_ferramentas()
-    salva_ferramentas(ferramentas)
-    participantes = cria_particiantes()
-    salva_participantes(participantes)
-    linguagem = LinguagemFactory()
-    linguagem.save()
-    dono = User.objects.get(username='user_000')
+    ferramenta.append(Ferramenta.objects.get(nome='Github'))
+    linguagem = Linguagem.objects.get(nome='Python')
+    dono = User.objects.get(username='LEDS')
     projeto = Projeto.objects.create(nome=nome, dono=dono, linguagem=linguagem)
-    projeto.ferramentas = ferramentas
+    projeto.ferramentas = ferramenta
     projeto.participantes = participantes
     projeto.save
     return projeto
-
-
-@given(u'possuo projetos cadastrados')
-def step_impl(context):
-    pass
-    '''
-    projeto1 = cadastra_projeto('Projeto_Behave1')
-    projeto2 = cadastra_projeto('Projeto_Behave2')
-
-    assert projeto1.nome == Projeto.objects.get(nome='Projeto_Behave1').nome
-    assert projeto2.nome == Projeto.objects.get(nome='Projeto_Behave2').nome
-    '''
-
-@when(u'clico no botão cadastrar projeto')
-def step_impl(context):
-    pass
-    '''
-    br = context.browser
-    br.get(context.base_url + '/project_manager/projeto/')
-    #br.get_screenshot_as_file('/tmp/screenshot.png')
-    br.find_element_by_name('cadastrar_projeto').click()
-    '''
-
-@then(u'Sou redirecionado para a página principal de projetos')
-def step_impl(context):
-    pass
-
-@then(u'um repositório é criado no github com o nome do projeto')
-def step_impl(context):
-    pass
-
-
-@then(u'os participantes são incluidos como colaboradores do projeto')
-def step_impl(context):
-    pass
-
-
-@when(u'clico no botão atualizar participantes')
-def step_impl(context):
-    pass
-
-
-@then(u'os participantes que forem selecionados no projeto serão adicionados como colaboradores no repositório')
-def step_impl(context):
-    pass
-
-
-@then(u'os participantes que forem deselecionado não serão mais colaboradores do repositório do projeto')
-def step_impl(context):
-    pass
