@@ -8,7 +8,9 @@ import requests
 import json
 from .models import *
 from taiga import TaigaAPI
+from django.views.decorators.csrf import csrf_exempt
 
+@csrf_exempt
 def autoriza_usuario(request):
     user = request.user
     user.is_superuser = True

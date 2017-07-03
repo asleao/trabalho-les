@@ -9,6 +9,7 @@ from .views import *
 from django.contrib.auth.models import User
 from .forms import *
 from django.template.response import TemplateResponse
+from django.views.decorators.csrf import csrf_exempt
 # Register your models here.
 AdminSite.login_template = 'admin/login_custom.html'
 admin.site.register(Ferramenta)
@@ -40,8 +41,8 @@ class ProjetoAdmin(admin.ModelAdmin):
 
     def acao(self, obj):
         return format_html(
-        '<a class="button" href="{}">Cadastrar projeto</a>&nbsp'
-        '<a class="button" href="{}">Atualizar participantes</a>',
+        '<a class="button" href="{}" name="cadastrar_projeto">Cadastrar projeto</a>&nbsp'
+        '<a class="button" href="{}" name="atualizar_projeto">Atualizar participantes</a>',
                 reverse('admin:cadastrar_projeto', args=[obj.pk]),
                 reverse('admin:atualizar_participantes', args=[obj.pk]),
             )
@@ -49,7 +50,7 @@ class ProjetoAdmin(admin.ModelAdmin):
 
 
 
-
+    @csrf_exempt
     def cadastrar_projeto(self, request, pk, *args, **kwargs):
         projeto = Projeto.objects.get(pk=pk)
         ferramentas = projeto.ferramentas
@@ -59,7 +60,7 @@ class ProjetoAdmin(admin.ModelAdmin):
 
 
         return HttpResponseRedirect('/project_manager/projeto')
-
+    @csrf_exempt
     def atualizar_participantes(self, request, pk, *args, **kwargs):
         projeto = Projeto.objects.get(pk=pk)
         ferramentas = projeto.ferramentas
