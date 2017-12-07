@@ -16,6 +16,6 @@ deploy:
   provider: heroku
   api_key:
     secure: zHP73DeQz40nPeVfzBKRm0teD19+i36HGOA9MizXdMdkRwMBieURAVYS5hKN0DSss7ZE09asGEN3esxjEEJDDdp4ktGDBx1HZqPw6SZO+zPtUyHzsVlrig6hKGyryECMJD6sGB2zVMZQhhDDk7kQdT8W1xI3LMO4WGp53zYG2lu65ivaHOYcTNkXzuI8MvI9wgmftB49HGsdEZ74z9PrATAho74zC2/xWvii9/vEduNkwhIw+XrW918xC6dRYWMHwWbg7DS7ITim4Wpe+ScyNRq86FABoUzYue+K6VX9qHmgOsW0CgRSL6zLUfMHnumlPuCt9uPWt+AsSGmYtckGi6+2vLO6PloeZC1X28GAgYUFB2T6ueGy/oJeIv8ABj7vaHhfdjI/qWY/z4JvHppbugL4NgSiJjOsoI026MJrLNWgY4YUk/b3i0O5vQ7KwPt8/sz4WfMHL8Yy6s/UUFm/b2HKg2pHXXzY1FbQOOCgkbn/to95ON3wNOXNjOP0AGP5F5gBmNf5f5BA48EBZLShEzuBqYjWGm1bJzj5jXviVuBLxWHiSvd+OOXjz5hosIEzyI6iG0hSfKR9dkOZZ8HaPXKttFMg9ctWMnPiZWXG83LFRpTKvpMfpoBSIg9uSZ/vue8wEBPs8ciFSOGLCodPiMogKtgpf6IlVC/QIT+Q/8M=
-  app: leds-zeppellin
+  app: leds-zeppelin
   on:
     repo: asleao/trabalho-les
