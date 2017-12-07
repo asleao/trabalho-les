@@ -27,7 +27,7 @@ SECRET_KEY = 'nq9#@k)2#t(wk9^v4z7e^xr%8ox2ng)=(ngw)^b&1k9o+lci44'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'trabalho-lesw.herokuapp.com',
+    'leds-zeppelin.herokuapp.com',
     'localhost',
 ]
 
@@ -158,8 +158,8 @@ LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
 LOGIN_REDIRECT_URL = 'autoriza_usuario'
 
-SOCIAL_AUTH_GITHUB_KEY = 'b1d083e02e332d5df8d0'
-SOCIAL_AUTH_GITHUB_SECRET = 'ee5ea55fa38b0851f16e1233590981401b90ae37'
+SOCIAL_AUTH_GITHUB_KEY = 'fb93553594ea826b6282'
+SOCIAL_AUTH_GITHUB_SECRET = '313b8c609f8b2d56fa02bc3888968719dc84e108'
 
 SOCIAL_AUTH_GITHUB_SCOPE = [
     'user',

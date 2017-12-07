@@ -3,13 +3,6 @@ sudo: false
 language: python
 python:
 - '3.5'
-jdk:
-- oraclejdk8
-addons:
-  sonarqube:
-    organization: gabriellmb05-github
-    token:
-      secure: "$SONAR_TOKEN"
 branches:
   only:
   - master
@@ -19,11 +12,10 @@ script:
 - cd src/
 - python3 manage.py behave
 - cd ..
-- sonar-scanner -Dsonar.login=$SONAR_TOKEN
 deploy:
   provider: heroku
   api_key:
-    secure: j/3M8OxJ7g4ceQqD5OuDCwx5Seo8wBINpwzm5h+b3KAJpkkG6no5gaN4CeRANC40XY3vFMCG0TB7p1xCqgbYdWAkRZoqd1TOHTmzzxrqxSNWPhobCVlI3jibBdRC7VimP2DYL0uX/v7+MfqSBXD/hyxira+9/3sVQbfxUWG5gHY5SsbM+OCN3jCcD2B4iViH561HVD+q3q5Al7ZI8Dy3fh3DipnZJ1MTJ9UFGUfu9Dat5yeH7VWpiWjiJy/rgt4jPZoZTCfz9uGf788bwlwv+EhGcjoDPH2yky9ZS+bP/ufUzQwdxl3xs19nkyMGO8BB56aJ+MZoJmjuLlBHnMXieboZJ64Fc9h8SLsKf+6ebN5wCrj6f4NN2bVS+aOzNCR700jH0/8cEJCp089z3RZVlSq8h3ZVnUeYnWF6qzhVvP+FNVP1w1DPuZt3Nln+Z5/oMpL4aqmHypCQe6VEC5/cWvut+BqeSb3T2Ys73Vyfb96IGEYkSPC5JZLaQBTM9U+0MCRz7cJf59TDkbWj6mcS6D2PqG/U+ie8TyNJipYR1PPF2QM4JaSPpKEIKj646W6UAd66NyKTzS3Rt/lukmjom8120FJL1RNVwpLLRPLIYq1SF1Gk5BW+zD1/+h+2DcET/aYLfVkFb/fOHM1W8tAEd/pqxh90PWcoyb1sX+uHFWo=
-  app: trabalho-lesw
+    secure: zHP73DeQz40nPeVfzBKRm0teD19+i36HGOA9MizXdMdkRwMBieURAVYS5hKN0DSss7ZE09asGEN3esxjEEJDDdp4ktGDBx1HZqPw6SZO+zPtUyHzsVlrig6hKGyryECMJD6sGB2zVMZQhhDDk7kQdT8W1xI3LMO4WGp53zYG2lu65ivaHOYcTNkXzuI8MvI9wgmftB49HGsdEZ74z9PrATAho74zC2/xWvii9/vEduNkwhIw+XrW918xC6dRYWMHwWbg7DS7ITim4Wpe+ScyNRq86FABoUzYue+K6VX9qHmgOsW0CgRSL6zLUfMHnumlPuCt9uPWt+AsSGmYtckGi6+2vLO6PloeZC1X28GAgYUFB2T6ueGy/oJeIv8ABj7vaHhfdjI/qWY/z4JvHppbugL4NgSiJjOsoI026MJrLNWgY4YUk/b3i0O5vQ7KwPt8/sz4WfMHL8Yy6s/UUFm/b2HKg2pHXXzY1FbQOOCgkbn/to95ON3wNOXNjOP0AGP5F5gBmNf5f5BA48EBZLShEzuBqYjWGm1bJzj5jXviVuBLxWHiSvd+OOXjz5hosIEzyI6iG0hSfKR9dkOZZ8HaPXKttFMg9ctWMnPiZWXG83LFRpTKvpMfpoBSIg9uSZ/vue8wEBPs8ciFSOGLCodPiMogKtgpf6IlVC/QIT+Q/8M=
+  app: leds-zeppellin
   on:
-    repo: gabriellmb05/trabalho-les
+    repo: asleao/trabalho-les
